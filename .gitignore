@@ -4,3 +4,23 @@ __pycache__/
 
 # Model artifacts (regenerate with train.py)
 *.joblib
+
+# Data files (regenerate with download/process scripts)
+data/raw/*.parquet
+data/processed/*.parquet
+!data/processed/__init__.py
+!data/processed/download.py
+!data/processed/process_data.py
+
+# Generated plots
+data/plots/*.png
+
+# Feature matrix (regenerate with build_features.py)
+features/feature_matrix.parquet
+
+# Model files
+models/*.pkl
+models/saved/*.joblib
+
+# MLflow
+mlruns/

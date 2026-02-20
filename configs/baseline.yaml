@@ -1,0 +1,50 @@
+# Baseline configuration for Contract Clause Classification
+# TF-IDF + LightGBM on LEDGAR (100-class)
+
+experiment_name: baseline
+
+tfidf:
+  max_features: 10000
+  ngram_range: [1, 2]
+  min_df: 3
+  max_df: 0.95
+  sublinear_tf: true
+
+model:
+  type: lightgbm
+  params:
+    n_estimators: 500
+    max_depth: 15
+    learning_rate: 0.1
+    num_leaves: 63
+    class_weight: balanced
+    n_jobs: -1
+    verbosity: -1
+
+training:
+  cv_folds: 5
+  stratified: true
+  early_stopping_rounds: 50
+  eval_metric: multi_logloss
+
+features:
+  use_tfidf: true
+  use_text_stats: true
+  use_legal_keywords: true
+  use_structural: false
+
+data:
+  train_path: data/processed/train.parquet
+  validation_path: data/processed/validation.parquet
+  test_path: data/processed/test.parquet
+
+output:
+  model_path: models/saved/lgbm_model.joblib
+  vectorizer_path: models/tfidf_vectorizer.pkl
+  label_names_path: models/saved/label_names.joblib
+  feature_matrix_path: features/feature_matrix.parquet
+
+mlflow:
+  tracking_uri: mlruns
+  experiment_name: contract-clause-classification
+  log_model: true
