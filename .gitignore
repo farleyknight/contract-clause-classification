@@ -14,13 +14,19 @@ data/processed/*.parquet
 
 # Generated plots
 data/plots/*.png
+analysis/plots/*.png
+!analysis/plots/.gitkeep
 
 # Feature matrix (regenerate with build_features.py)
 features/feature_matrix.parquet
+features/feature_matrix.json
 
 # Model files
 models/*.pkl
 models/saved/*.joblib
+models/saved/*.npz
+!models/saved/.gitkeep
+models/evaluation_results.json
 
 # MLflow
 mlruns/
